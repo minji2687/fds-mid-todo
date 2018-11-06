@@ -85,8 +85,22 @@ async function drawTodoList() {
 
     bodyEl.textContent = todoItem.body;
 
+    //삭제버튼 만들기
+    const deleteButtonEl = fragment.querySelector(".delete-button")
+    deleteButtonEl.addEventListener('click', async e => {
+      await api.delete('/todos/'+todoItem.id)//데이터 삭제요청 끝
+
+       drawTodoList()//리스트 다시 그려주기
+
+    })//삭제 이벤트 리스너 끝
+    todoListEl.appendChild(deleteButtonEl);
+
+
     // 3. 문서 내부에 삽입하기
     todoListEl.appendChild(fragment);
+
+
+
   });
 
   // 3. 문서 내부에 삽입하기
